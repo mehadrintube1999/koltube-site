@@ -1,0 +1,11 @@
+{
+  "versionCode": 27,
+  "versionName": "1.0.26",
+  "apkUrl": "https://koltube.co.il/app/test/KolTube-1.0.26-27-test.apk",
+  "size": 28606516,
+  "sha256": "b5b964676392c8357d4a917b6c78102c6451687e1e56b64541867d7f6b3384ea",
+  "minVersionCode": 0,
+  "notes": "Share: Kol Tube badge on the shared picture",
+  "publishedAt": "2026-10-08T17:48:17.657Z",
+  "commit": "484a337"
+}
