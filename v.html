@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>צפייה בקול טיוב</title>
+  <!-- דף הנחיתה של קישור ששותף מהאפליקציה (koltube.co.il/v?id=...). מי שהאפליקציה מותקנת אצלו
+       בכלל לא מגיע לכאן - אנדרואיד פותח את הקישור ישר באפליקציה (ראו .well-known/assetlinks.json).
+       מוצגת רק התמונה של הסרטון (משרת התמונות של יוטיוב), כדי שיראו מה מחכה להם - אין כאן
+       נגן ולא קישור ליוטיוב: הסרטון נצפה רק בתוך האפליקציה. סינון שחוסם את התמונה - מוצג
+       במקומה ריבוע בצבע המותג (ראו "התמונה של הסרטון" בסקריפט). -->
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="הסרטון הזה זמין לצפייה באפליקציית קול טיוב - יוטיוב כשר לכל המשפחה.">
+  <meta property="og:title" content="שיתפו איתך סרטון בקול טיוב">
+  <meta property="og:description" content="הסרטון זמין לצפייה באפליקציית קול טיוב - יוטיוב כשר לכל המשפחה.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:image" content="https://koltube.co.il/assets/icon.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #023167;
+      --ink: #111827;
+      --muted: #4b5563;
+      --line: #c9ced6;
+    }
+
+    * { box-sizing: border-box; }
+
+    /* בלי זה display של .btn גובר על hidden, ו"כבר מותקן" הופיע גם כשהיה צריך להיות מוסתר */
+    [hidden] { display: none !important; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Heebo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 24px 18px 28px;
+      text-align: center;
+    }
+
+    /* כותרת: השם והסיסמה מימין, הלוגו משמאל - כמו בעיצוב */
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .brand-text { text-align: right; }
+    .brand h1 { margin: 0; font-size: 34px; font-weight: 900; line-height: 1.1; color: var(--ink); }
+    .brand p { margin: 4px 0 0; font-size: 16px; color: var(--muted); }
+    .brand img { width: 64px; height: 64px; border-radius: 16px; flex: none; }
+
+    /* התמונה של הסרטון, עם עיגול הפעלה באמצע */
+    .thumb {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0a4a94, var(--brand) 55%, #01152d);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      margin-bottom: 22px;
+    }
+    /* Short: מסגרת לאורך, באמצע */
+    .thumb.short { width: auto; height: 300px; aspect-ratio: 9 / 16; margin-inline: auto; }
+    .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 68px;
+      height: 68px;
+      margin: -34px 0 0 -34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play svg { width: 30px; height: 30px; margin-left: 4px; }
+
+    h2 { margin: 0 0 8px; font-size: 28px; font-weight: 900; line-height: 1.25; }
+    .sub { margin: 0 0 22px; font-size: 18px; color: var(--muted); }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 18px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 20px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn svg { width: 26px; height: 26px; flex: none; }
+    .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 8px 22px rgba(2, 49, 103, 0.3); }
+    .btn-outline { margin-top: 12px; background: #fff; color: var(--ink); border: 1.5px solid var(--line); font-weight: 500; }
+
+    .note { margin: 14px 0 0; font-size: 15px; color: var(--muted); }
+    .home { display: inline-block; margin-top: 26px; color: var(--brand); font-size: 16px; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">
+      <div class="brand-text">
+        <h1>קול טיוב</h1>
+        <p>יוטיוב כשר לכל המשפחה</p>
+      </div>
+      <img src="assets/icon.png" alt="" width="64" height="64">
+    </div>
+
+    <a class="thumb" id="thumb" href="https://koltube.co.il/" aria-label="הורדת קול טיוב">
+      <span class="play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15a1 1 0 0 0 1.53.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+      </span>
+    </a>
+
+    <h2>הסרטון שלך מחכה לך</h2>
+    <p class="sub">כדי לצפות בסרטון יש להשתמש<br>באפליקציית קול טיוב.</p>
+
+    <a class="btn btn-primary" id="download" href="https://koltube.co.il/">
+      הורדת קול טיוב
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+    </a>
+    <a class="btn btn-outline" id="open-app" href="https://koltube.co.il/" hidden>כבר מותקן? פתח באפליקציה</a>
+    <p class="note" id="not-android" hidden>האפליקציה זמינה כרגע לאנדרואיד בלבד.</p>
+
+    <a class="home" href="https://koltube.co.il/">מה זה קול טיוב?</a>
+  </main>
+
+  <script>
+    var download = document.getElementById("download");
+    var thumb = document.getElementById("thumb");
+
+    // ===== קישור ההורדה =====
+    // כמו בדף הראשי (index.html): הגרסה האחרונה מכרטיס הגרסה שבאתר, והקובץ יורד מיד. כל עוד
+    // אין כרטיס (לא פורסמה גרסה רשמית), הכפתור מוביל לדף הראשי של האתר.
+    // לחיצה על התמונה עושה אותו דבר כמו הכפתור.
+    fetch("/app/update.json", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (card) {
+        if (card && card.apkUrl) {
+          download.href = card.apkUrl;
+          thumb.href = card.apkUrl;
+        }
+      })
+      .catch(function () {});
+
+    var params = new URLSearchParams(location.search);
+    var id = params.get("id") || "";
+    var isShort = params.get("s") === "1";
+    // מזהה סרטון ביוטיוב הוא תמיד 11 תווים מהסוג הזה. כל דבר אחר לא מועבר הלאה.
+    var validId = /^[A-Za-z0-9_-]{11}$/.test(id);
+
+    // ===== התמונה של הסרטון =====
+    // hqdefault (480x360) קיים לכל סרטון. הוא 4:3 עם פסים שחורים, ו-object-fit: cover חותך
+    // אותם: ברגיל למסגרת 16:9, וב-Short למסגרת לאורך שבאמצע.
+    // נחסמה או לא נטענה - נשאר הריבוע בצבע המותג עם עיגול ההפעלה.
+    if (isShort) thumb.classList.add("short");
+    if (validId) {
+      var img = new Image();
+      img.alt = "";
+      img.onload = function () { thumb.insertBefore(img, thumb.firstChild); };
+      img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+    }
+
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid && validId) {
+      // מי שהאפליקציה מותקנת אצלו אבל הקישור נפתח בכל זאת בדפדפן (למשל בדפדפן הפנימי של אפליקציה
+      // אחרת): intent עם שם החבילה פותח אותה ישירות. אם היא לא מותקנת, כרום חוזר לדף הראשי
+      // של האתר ולא לחנות של גוגל - האפליקציה לא בגוגל פליי.
+      var path = "koltube.co.il/v?id=" + id + (isShort ? "&s=1" : "");
+      var fallback = encodeURIComponent("https://koltube.co.il/");
+      var openApp = document.getElementById("open-app");
+      openApp.href = "intent://" + path + "#Intent;scheme=https;package=il.co.koltube.app;S.browser_fallback_url=" + fallback + ";end";
+      openApp.hidden = false;
+    } else if (!isAndroid) {
+      document.getElementById("not-android").hidden = false;
+    }
+  </script>
+</body>
+</html>

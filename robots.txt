@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /app/test/
+
+Sitemap: https://koltube.co.il/sitemap.xml

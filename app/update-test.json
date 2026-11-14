@@ -1,0 +1,11 @@
+{
+  "versionCode": 30,
+  "versionName": "1.0.29",
+  "apkUrl": "https://koltube.co.il/app/test/KolTube-1.0.29-30-test.apk",
+  "size": 32123562,
+  "sha256": "d7be9ac4c45feb868dbd8f1b158a3a26cb06d957641732f9de1fdbb8082a5018",
+  "minVersionCode": 0,
+  "notes": "Podcasts toggle fits small phones; update download resumes",
+  "publishedAt": "2026-10-22T10:49:46.011Z",
+  "commit": "380860c"
+}
