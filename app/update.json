@@ -1,0 +1,12 @@
+{
+  "versionCode": 36,
+  "versionName": "1.0.35",
+  "apkUrl": "https://koltube.co.il/app/KolTube-1.0.35.apk",
+  "size": 7051496,
+  "sha256": "83734f1be72e10579d2bebb9777484f9b9df25be8c7294834cc0c6db43a23c56",
+  "minVersionCode": 0,
+  "notes": "הצעות חיפוש מיידיות, טאב \"עוד מ...\" בנגן לשירים מפלייליסט, ותיקוני תצוגה",
+  "publishedAt": "2026-11-19T11:15:18.709Z",
+  "commit": "7194cc6",
+  "siteDownload": false
+}

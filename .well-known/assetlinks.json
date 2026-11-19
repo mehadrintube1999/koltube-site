@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "il.co.koltube.app",
+      "sha256_cert_fingerprints": [
+        "88:00:D8:9B:88:EB:DA:34:5D:1A:41:6C:62:ED:77:E8:35:32:07:D9:29:C5:33:BE:7D:CE:CA:CF:33:2E:70:B0",
+        "76:B3:7A:DD:7E:1B:0D:03:C4:24:66:34:A2:B4:28:49:E2:E8:5F:46:91:00:BE:92:9C:46:15:F7:B9:EB:02:D8"
+      ]
+    }
+  }
+]
